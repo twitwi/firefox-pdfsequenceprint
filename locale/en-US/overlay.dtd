@@ -1,0 +1,3 @@
+<!ENTITY start "Start PDF export">
+<!ENTITY stop "Stop PDF export">
+<!ENTITY reset "Reset PDF export counter">

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://pdfsequenceprint/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://pdfsequenceprint/locale/overlay.dtd">
+<overlay id="helloworld-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="pdfsequenceprint-start" label="&start;" 
+              oncommand="printpdf.startExport();"/>
+    <menuitem id="pdfsequenceprint-stop" label="&stop;" 
+              oncommand="printpdf.stopExport();"/>
+    <menuitem id="pdfsequenceprint-reset" label="&reset;" 
+              oncommand="printpdf.resetCounter();"/>
+  </menupopup>
+</overlay>
