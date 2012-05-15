@@ -1,3 +1,5 @@
+<!ENTITY oncea4 "Export PDF (once, in A4)">
+<!ENTITY once "Export PDF (once)">
 <!ENTITY start "Start PDF export">
 <!ENTITY stop "Stop PDF export">
 <!ENTITY reset "Reset PDF export counter">

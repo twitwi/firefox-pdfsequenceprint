@@ -6,6 +6,10 @@
   <script src="overlay.js"/>
 
   <menupopup id="menu_ToolsPopup">
+    <menuitem id="pdfsequenceprint-oncea4" label="&oncea4;" 
+              oncommand="printpdf.exportOnceA4();"/>
+    <menuitem id="pdfsequenceprint-once" label="&once;" 
+              oncommand="printpdf.exportOnce();"/>
     <menuitem id="pdfsequenceprint-start" label="&start;" 
               oncommand="printpdf.startExport();"/>
     <menuitem id="pdfsequenceprint-stop" label="&stop;" 
@@ -13,4 +17,16 @@
     <menuitem id="pdfsequenceprint-reset" label="&reset;" 
               oncommand="printpdf.resetCounter();"/>
   </menupopup>
+
+  <toolbarpalette id="BrowserToolbarPalette"> 
+    <toolbarbutton id="pdfsequenceprint-toolbar-once" label="&once;" oncommand="printpdf.exportOnce();"/> 
+  </toolbarpalette> 
+  <!-- button details -->
+  <!--toolbarbutton id="pdfsequenceprint-toolbar-once"
+                   label="&once;" 
+                   tooltiptext="Export a PDF" 
+                   oncommand="CustomButton[1]()" 
+                   class="toolbarbutton-1 chromeclass-toolbar-additional custombutton" 
+  /--> 
+
 </overlay>

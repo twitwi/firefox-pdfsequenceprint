@@ -15,16 +15,29 @@ var printpdf = {
             .getService(Components.interfaces.nsIPrefBranch).getBranch("extensions.pdfsequenceprint@pdfheeere.");
         this.printCounter = 0;
         this.exporting = false;
+        this.a4 = false;
     },
     onPrintEnd: function() {
         var utils = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils);
         var kk = 39;
         utils.sendKeyEvent("keydown", kk, kk, 0);
-        utils.sendKeyEvent("keypress", kk, kk, 0);
+        //utils.sendKeyEvent("keypress", kk, kk, 0);
         utils.sendKeyEvent("keyup", kk, kk, 0);
         if (this.printCounter < 150) {
             setTimeout(function (){printpdf.printIt()}, 1000);
         }
+    },
+    exportOnce: function(e) {
+        this.exporting = true;
+        this.printIt();
+        this.exporting = false;
+    },
+    exportOnceA4: function(e) {
+        this.exporting = true;
+        this.a4 = true;
+        this.printIt();
+        this.exporting = false;
+        this.a4 = false;
     },
     startExport: function(e) {
         this.exporting = true;
@@ -65,19 +78,28 @@ var printpdf = {
         printSettings.toFileName  = filename;
         printSettings.printSilent = true;
         printSettings.paperSizeUnit = Components.interfaces.nsIPrintSettings.kPaperSizeMillimeters;
-        printSettings.paperName = "iso_a42";
-        printSettings.paperData = "iso_a42_210x297mm";
-        printSettings.paperWidth = 200;
-        printSettings.paperHeight = 150;
+        if (this.a4) {
+            printSettings.paperName = "iso_a4";
+            printSettings.paperData = "iso_a4_210x297mm";
+            printSettings.paperWidth = 210;
+            printSettings.paperHeight = 297;
+            printSettings.marginRight = 0.4;
+        } else {
+            // our custom format for slides
+            printSettings.paperName = "iso_a42";
+            printSettings.paperData = "iso_a42_210x297mm";
+            printSettings.paperWidth = 200;
+            printSettings.paperHeight = 150;
+            printSettings.marginLeft = 0;
+            printSettings.marginRight = 0;
+            printSettings.marginTop = 0;
+            printSettings.marginBottom = 0;
+            printSettings.unwriteableMarginLeft = 0;
+            printSettings.unwriteableMarginRight = 0;
+            printSettings.unwriteableMarginTop = 0;
+            printSettings.unwriteableMarginBottom = 0;
+        }
         
-        printSettings.marginLeft = 0;
-        printSettings.marginRight = 0;
-        printSettings.marginTop = 0;
-        printSettings.marginBottom = 0;
-        printSettings.unwriteableMarginLeft = 0;
-        printSettings.unwriteableMarginRight = 0;
-        printSettings.unwriteableMarginTop = 0;
-        printSettings.unwriteableMarginBottom = 0;
         printSettings.shrinkToFit = true;
         printSettings.printRange = 2; // kRangeFocusFrame = 3
         
@@ -102,6 +124,7 @@ var printpdf = {
         webBrowserPrint.print(printSettings, {
             onProgressChange: function() {},
             onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
+                if (aStateFlags==262160)
                     printpdf.onPrintEnd();
             }
         });
