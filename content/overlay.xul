@@ -8,7 +8,7 @@
   <menupopup id="menu_ToolsPopup">
     <menuitem id="pdfsequenceprint-oncea4" label="&oncea4;" 
               oncommand="printpdf.exportOnceA4();"/>
-    <menuitem id="pdfsequenceprint-once" label="&once;" 
+    <menuitem id="pdfsequenceprint-once" label="&once;" key="pdf-export-export-once"
               oncommand="printpdf.exportOnce();"/>
     <menuitem id="pdfsequenceprint-start" label="&start;" 
               oncommand="printpdf.startExport();"/>
@@ -17,6 +17,10 @@
     <menuitem id="pdfsequenceprint-reset" label="&reset;" 
               oncommand="printpdf.resetCounter();"/>
   </menupopup>
+
+  <keyset>
+    <key id="pdf-export-export-once" modifiers="accel alt shift" key="E" oncommand="printpdf.exportOnce();"/>
+  </keyset>
 
   <toolbarpalette id="BrowserToolbarPalette"> 
     <toolbarbutton id="pdfsequenceprint-toolbar-once" label="&once;" oncommand="printpdf.exportOnce();"/> 
