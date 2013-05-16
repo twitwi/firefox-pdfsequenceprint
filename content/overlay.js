@@ -83,13 +83,21 @@ var printpdf = {
             printSettings.paperData = "iso_a4_210x297mm";
             printSettings.paperWidth = 210;
             printSettings.paperHeight = 297;
-            printSettings.marginRight = 0.4;
+            // 1310x1910px => 369.711x539.044mm (inkscape)
+            printSettings.paperWidth = 370;
+            printSettings.paperHeight = 540;
+            //printSettings.marginRight = 0.4;
+            printSettings.marginRight = 0.05;
+            printSettings.marginLeft = 0.05;
+            printSettings.marginTop = 0.05;
+            printSettings.marginBottom = 0.05;
         } else {
             // our custom format for slides
             printSettings.paperName = "iso_a42";
             printSettings.paperData = "iso_a42_210x297mm";
-            printSettings.paperWidth = 200;
-            printSettings.paperHeight = 150;
+            // 800x600px => 225.778x169.333mm (according to inkscape)
+            printSettings.paperWidth = 225.778;
+            printSettings.paperHeight = 169.333;
             printSettings.marginLeft = 0;
             printSettings.marginRight = 0;
             printSettings.marginTop = 0;
@@ -100,7 +108,8 @@ var printpdf = {
             printSettings.unwriteableMarginBottom = 0;
         }
         
-        printSettings.shrinkToFit = true;
+        //printSettings.shrinkToFit = true;
+        printSettings.shrinkToFit = false;
         printSettings.printRange = 2; // kRangeFocusFrame = 3
         
         printSettings.outputFormat = Components.interfaces.nsIPrintSettings.kOutputFormatPDF;
@@ -147,7 +156,13 @@ window.addEventListener("load", function(e) { printpdf.onLoad(e); }, false);
 /*
 COMMANDS
 
-touch .mozilla/firefox/prlyuv8p.extdev/extensions/pdfsequenceprint@heeere.com &&  firefox --no-remote -P extdev
+  cd ~/projects/deck-js-stuffs/firefox-pdf-export
+  mkdir ~/.mozilla/firefox/prlyuv8p.extdev/extensions/
+  pwd > ~/.mozilla/firefox/prlyuv8p.extdev/extensions/pdfsequenceprint@heeere.com
+
+in deck.js/core/deck.core.css, remove the print style
+
+touch ~/.mozilla/firefox/prlyuv8p.extdev/extensions/pdfsequenceprint@heeere.com &&  firefox --no-remote -P extdev
 pdftk /tmp/test-pdfsequnenceprint-*.pdf cat output /tmp/out.pdf && acroread /tmp/out.pdf
 
 
