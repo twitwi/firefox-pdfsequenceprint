@@ -16,6 +16,7 @@ var printpdf = {
         this.printCounter = 0;
         this.exporting = false;
         this.a4 = false;
+        this.previousLocation = "DUMMY";
     },
     onPrintEnd: function() {
         var utils = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils);
@@ -50,7 +51,13 @@ var printpdf = {
         this.printCounter = 0;
     },
     printIt: function() {
+        var loc = window.top.getBrowser().selectedBrowser.contentWindow.location.toString();
+        if (loc == this.previousLocation) {
+            stopExport();
+        }
+        this.previousLocation = loc;
         if (!this.exporting) return;
+
         /*
           var nsIFilePicker = Components.interfaces.nsIFilePicker;
           var picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
