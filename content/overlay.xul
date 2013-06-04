@@ -11,7 +11,9 @@
     <menuitem id="pdfsequenceprint-once" label="&once;" key="pdf-export-export-once"
               oncommand="printpdf.exportOnce();"/>
     <menuitem id="pdfsequenceprint-start" label="&start;" 
-              oncommand="printpdf.startExport();"/>
+              oncommand="printpdf.startExport(true);"/>
+    <menuitem id="pdfsequenceprint-start-blind" label="&startblind;" 
+              oncommand="printpdf.startExport(false);"/>
     <menuitem id="pdfsequenceprint-stop" label="&stop;" 
               oncommand="printpdf.stopExport();"/>
     <menuitem id="pdfsequenceprint-reset" label="&reset;" 

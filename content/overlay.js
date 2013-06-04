@@ -30,18 +30,21 @@ var printpdf = {
     },
     exportOnce: function(e) {
         this.exporting = true;
+        this.autostop = false;
         this.printIt();
         this.exporting = false;
     },
     exportOnceA4: function(e) {
         this.exporting = true;
+        this.autostop = false;
         this.a4 = true;
         this.printIt();
         this.exporting = false;
         this.a4 = false;
     },
-    startExport: function(e) {
+    startExport: function(autostop) {
         this.exporting = true;
+        this.autostop = autostop;
         this.printIt();
     },
     stopExport: function(e) {
@@ -52,7 +55,7 @@ var printpdf = {
     },
     printIt: function() {
         var loc = window.top.getBrowser().selectedBrowser.contentWindow.location.toString();
-        if (loc == this.previousLocation) {
+        if (this.autostop && loc == this.previousLocation) {
             stopExport();
         }
         this.previousLocation = loc;
